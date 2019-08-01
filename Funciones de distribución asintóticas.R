@@ -10,3 +10,4 @@ x<-seq(-3,3,.1)
 
 plot(eq(x),x, type='l')
 
+ <
