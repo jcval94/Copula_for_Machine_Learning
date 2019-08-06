@@ -140,26 +140,31 @@ plot(makeAbscontDistribution(Huberize(N, -0,1)),mfColRow=FALSE)
 ##################################################
 #Primero ver que se puedan crear las cópulas asociadas
 
-mylist <- UnivarMixingDistribution(Binom(3,.3), Norm(), 
+#Todas las componentes deben ser contínuas
+mylist <- UnivarMixingDistribution(Norm(5), Norm(), 
                                    mixCoeff=c(1/4,3/4))
 
-dplot<-distr::d(Norm())
 dplot<-distr::d(mylist)
 pplot<-distr::p(mylist)
 rplot<-distr::r(mylist)
 qplot<-distr::q(mylist)
 
+mylist <- UnivarMixingDistribution(Norm(15), Norm(10), 
+                                   mixCoeff=c(1/4,3/4))
 
-myCop <- normalCopula(param=c(0.4,0.2,-0.8), dim = 3, dispstr = "un")
+dplott<-distr::d(mylist)
+pplott<-distr::p(mylist)
+rplott<-distr::r(mylist)
+qplott<-distr::q(mylist)
 
+plot(density(rplot(1000)))
+myCop <- normalCopula(param=c(0.4), dim = 2, dispstr = "un")
+#myCop <- ellipCopula(param=c(0.4), dim = 3, dispstr = "ex")
 #Creo la cópula
-myMvd <- mvdc(copula=myCop, margins=c("gamma", "beta", "t"),
-              paramMargins=list(list(shape=2, scale=1),
-                                list(shape1=2, shape2=2), 
-                                list(df=5)) )
+myMvd <- mvdc(copula=myCop, margins=c("plott", "plot"),
+              paramMargins=list(list(),
+                                list()))
 
-myMvd <- mvdc(copula=myCop, margins=c("gamma", "beta", "plot"),
-              paramMargins=list(list(shape=2, scale=1),
-                                list(shape1=2, shape2=2), 
-                                list()) )
-
+Z2 <- rMvdc(2000,myMvd)
+colnames(Z2) <- c("x1", "x2")
+pairs.panels(Z2)
