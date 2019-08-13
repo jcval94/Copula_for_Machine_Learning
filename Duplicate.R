@@ -168,3 +168,29 @@ myMvd <- mvdc(copula=myCop, margins=c("plott", "plot"),
 Z2 <- rMvdc(2000,myMvd)
 colnames(Z2) <- c("x1", "x2")
 pairs.panels(Z2)
+
+
+
+#Iniciamos el ejemplo:
+
+data(iris)
+
+#Las variables numéricas las conservamos y las categóricas las transformamos en dummies
+library(purrr)
+library(tibble)
+All_number<-function(df){
+  df<-as_tibble(df)
+  classes<-purrr::map_chr(df,class);nnm<-!classes %in% "numeric"
+  no_num<-df[,names(df)[nnm]]
+  #Ahora aplicamos la función categorizar
+  no_mun_2<-categorizar(no_num,ALL = F)
+  #Ahora combinamos las tablas para que todo sea numérico
+  
+  df_n<-cbind(df[,!nnm],no_mun_2)
+  df_n
+}
+
+
+
+
+
