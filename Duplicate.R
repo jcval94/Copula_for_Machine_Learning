@@ -190,7 +190,9 @@ All_number<-function(df){
   df_n
 }
 
+ls("package:data")
 
+All_number()
 
 
 
