@@ -190,9 +190,22 @@ All_number<-function(df){
   df_n
 }
 
-ls("package:data")
+data(iris)
+All_number(iris)
 
-All_number()
+#Nas to categ
+
+na_prop<-function(X){
+  sum(ifelse(is.na(X),1,0))/length(X)
+}
+
+Categ_NA<-function(df){
+  
+  
+}
+
+
+
 
 
 
