@@ -200,8 +200,7 @@ na_prop<-function(X){
 }
 
 Categ_NA<-function(df){
-  
-  
+  purrr::map_df(df,na_prop)
 }
 
 
